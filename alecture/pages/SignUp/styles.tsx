@@ -1,9 +1,8 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const Header = styled.header`
   text-align: center;
-  font-family: Slack-Larsseit, Helvetica Neue, Helvetica, Segoe UI, Tahoma,
-    Arial, sans-serif;
+  font-family: Slack-Larsseit, Helvetica Neue, Helvetica, Segoe UI, Tahoma, Arial, sans-serif;
   font-weight: 700;
   font-size: 48px;
   line-height: 46px;
@@ -28,6 +27,7 @@ export const Label = styled.label`
     cursor: pointer;
     line-height: 1.46666667;
     font-weight: 700;
+    font-family: Slack-Larsseit, Helvetica Neue, Helvetica, Segoe UI, Tahoma, Arial, sans-serif;
   }
 `;
 

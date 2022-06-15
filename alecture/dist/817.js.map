@@ -1,0 +1,1 @@
+{"version":3,"file":"817.js","mappings":"6IAEA,MAQA,EARc,IAEV,2BACE","sources":["webpack://alecture/./pages/Login/index.tsx"],"sourcesContent":["import React from \"react\";\n\nconst Login = () => {\n  return (\n    <div>\n      <h1>dddfdfd</h1>\n    </div>\n  );\n};\n\nexport default Login;\n"],"names":[],"sourceRoot":""}
