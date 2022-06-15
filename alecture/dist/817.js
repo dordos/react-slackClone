@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkalecture=self.webpackChunkalecture||[]).push([[817],{817:(e,l,t)=>{t.r(l),t.d(l,{default:()=>a});var u=t(294);const a=()=>u.createElement("div",null,u.createElement("h1",null,"dddfdfd"))}}]);
