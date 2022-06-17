@@ -2,6 +2,7 @@ import useInput from '@hooks/useInput';
 import axios from 'axios';
 import React, { useCallback, useState } from 'react';
 import { Success, Form, Label, Error, Input, LinkContainer, Button, Header } from './styles';
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
   const [email, onChangeEmail] = useInput('');
@@ -35,7 +36,6 @@ const SignUp = () => {
         console.log('sign up of server');
         setSignUpError('');
         setSignUpSuccess(false);
-
         axios
           .post('/api/users', {
             email,
@@ -98,7 +98,7 @@ const SignUp = () => {
       </Form>
       <LinkContainer>
         Do you have account?&nbsp;
-        <a href='/login'>Sgin in to Slack</a>
+        <Link to='/login'>Sgin in to Slack</Link>
       </LinkContainer>
     </div>
   );
