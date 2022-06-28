@@ -2,18 +2,19 @@ import useInput from '@hooks/useInput';
 import { Success, Form, Error, Label, Input, LinkContainer, Button, Header } from '@pages/SignUp/styles';
 import fetcher from '@utils/fetcher';
 import axios from 'axios';
+import { truncate } from 'fs';
 import React, { useCallback, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import useSWR from 'swr';
 
 const LogIn = () => {
   const { data, error, mutate } = useSWR('/api/users', fetcher, {
-    dedupingInterval: 1000000,
+    dedupingInterval: 10000,
   });
-
   const [logInError, setLogInError] = useState(false);
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
+
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
@@ -21,7 +22,7 @@ const LogIn = () => {
       axios
         .post('/api/users/login', { email, password }, { withCredentials: true })
         .then((response) => {
-          mutate();
+          mutate(response.data, false); //OPTIMISTIC UI
         })
         .catch((error) => {
           setLogInError(error.response?.data?.statusCode === 401);
@@ -29,6 +30,14 @@ const LogIn = () => {
     },
     [email, password],
   );
+
+  if (data === undefined) {
+    return <div>Loding...</div>;
+  }
+
+  if (data) {
+    return <Redirect to='/workspace/channel' />;
+  }
 
   // console.log(error, userData);
   // if (!error && userData) {
