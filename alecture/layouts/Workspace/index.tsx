@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { VFC, useCallback, useState } from 'react';
 import fetcher from '@utils/fetcher';
 import useSWR from 'swr';
 import axios from 'axios';
@@ -14,6 +14,7 @@ import {
   ProfileModal,
   RightMenu,
   WorkspaceButton,
+  WorkspaceModal,
   WorkspaceName,
   Workspaces,
   WorkspaceWrapper,
@@ -31,9 +32,12 @@ import { toast } from 'react-toastify';
 const Channel = loadable(() => import('@pages/Channel'));
 const DirectMessage = loadable(() => import('@pages/DirectMessage'));
 
-const Workspace: FC = ({ children }) => {
+const Workspace: VFC = () => {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showCreateWorkspaceModal, setShowCreateWorkspaceModal] = useState(false);
+  const [showCreateChannelModal, setShowCreateChannelModal] = useState(false);
+
+  const [showWorkspaceModal, setShowWorkspaceModal] = useState(false);
   const [newWorkspace, onChangeNewWorkspace, setNewWorkspace] = useInput('');
   const [newUrl, onChangeNewUrl, setNewUrl] = useInput('');
 
@@ -93,6 +97,14 @@ const Workspace: FC = ({ children }) => {
     setShowCreateWorkspaceModal(false);
   }, []);
 
+  const toggleWorkspaceModal = useCallback(() => {
+    setShowWorkspaceModal((prev) => !prev);
+  }, []);
+
+  const onClickAddChannel = useCallback(() => {
+    onClickAddChannel;
+  }, []);
+
   if (!userData) {
     return <Redirect to='/login' />;
   }
@@ -130,8 +142,15 @@ const Workspace: FC = ({ children }) => {
           <AddButton onClick={onClickCreateWorkspace}>+</AddButton>
         </Workspaces>
         <Channels>
-          <WorkspaceName>Sleact</WorkspaceName>
-          <MenuScroll>menu scroll</MenuScroll>
+          <WorkspaceName onClick={toggleWorkspaceModal}>sleact</WorkspaceName>
+          <MenuScroll>
+            <Menu show={showWorkspaceModal} onCloseModal={toggleWorkspaceModal} style={{ top: 95, left: 80 }} />
+            <WorkspaceModal>
+              <h2>Sleact</h2>
+              <button onClick={onClickAddChannel}>add channel</button>
+              <button onClick={onLogout}></button>
+            </WorkspaceModal>
+          </MenuScroll>
         </Channels>
         <Chats>
           <Switch>
@@ -153,6 +172,11 @@ const Workspace: FC = ({ children }) => {
           <Button type='submit'>Submit</Button>
         </form>
       </Modal>
+      <CreateChnnelModal
+        show={showCreateChannelModal}
+        onCloseModal={onCloseModal}
+        setShowCreateChannel
+      ></CreateChnnelModal>
     </div>
   );
 };
